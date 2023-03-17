@@ -29,7 +29,7 @@ class SnippetForm(forms.ModelForm):
 
       widgets = {
           'name': forms.TextInput(attrs={"class":"form-control form-control-lg", 'placeholder': 'Название сниппета'}),
-          'language': forms.Select(attrs={"class": "form-control form-control-lg", 'placeholder': 'Язык'}, choices=languages),
+          'language': forms.Select(attrs={"class": "form-control form-control-lg", 'placeholder': 'Язык'}, choices=choices),
           'code': forms.Textarea(attrs={"class": "form-control form-control-lg", 'placeholder': 'Название сниппета', 'cols': '96', 'rows': '10'}),
           'public': forms.CheckboxInput(attrs={"class": "form-control form-control-lg"})
       }

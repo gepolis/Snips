@@ -1,4 +1,5 @@
 from django.contrib.auth import login, logout
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -141,10 +142,34 @@ def logout_request(request):
         messages.info(request, "You have successfully logged out.")
     return redirect("home")
 
-def profile_snippets_page(request):
-    if request.user.is_authenticated:
-        snips = Snippet.objects.filter(author=request.user.id)
-        context = {'pagename': 'Мои Cниппеты', 'snips': snips, 'count': len(snips)}
+def profile_snippets_page(request,id):
+    #if request.user.is_authenticated:
+        snips = Snippet.objects.filter(author=id)
+        context = {'pagename': 'Cниппеты', 'snips': snips, 'count': len(snips)}
         return render(request, 'profile_snippets.html', context)
-    else:
-        return redirect("signin")
+    #else:
+    #    return redirect("signin")
+def profile_stats_page(request,id):
+    print()
+    snippets = Snippet.objects.filter(author=id)
+    snippetLangCount = {}
+    countsnipt = len(snippets)
+    for snippet in snippets:
+        if snippet.language in snippetLangCount:
+            snippetLangCount[snippet.language]=snippetLangCount[snippet.language]+1
+        else:
+            snippetLangCount[snippet.language] = 1
+    print(snippetLangCount)
+    snippetProccent={}
+
+    for language in snippetLangCount:
+        snippetProccent[language]=(snippetLangCount[language]/countsnipt*100)
+    print(snippetProccent)
+    resault = {}
+    i=0
+    for proc in snippetProccent:
+        resault[f"{proc}: {round(snippetProccent[proc],2)}"]=''
+        i+=1
+    content = {"languages": resault}
+    print(content)
+    return render(request,"profile_stats.html", context=content)

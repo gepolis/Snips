@@ -24,7 +24,7 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="form-inline">
-                    <a class="btn btn-outline-secondary" href="{% url 'profile_snippets' %}">
+                    <a class="btn btn-outline-secondary" href="{% url 'profile_snippets' id=user.pk %}">
                         Мои сниппеты
                     </a>
                 </li>

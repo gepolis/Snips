@@ -16,6 +16,7 @@ urlpatterns = [
     path("auth/signup/", views.register, name="signup"),
     path("auth/signin/", views.login_request, name="signin"),
     path("auth/logout/", views.logout_request, name="logout"),
-    path("profile/snippets", views.profile_snippets_page, name="profile_snippets"),
+    path("profile/<int:id>/snippets", views.profile_snippets_page, name="profile_snippets"),
+    path("profile/<int:id>/stats", views.profile_stats_page, name="profile_stats"),
     path("languages", views.languages)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
