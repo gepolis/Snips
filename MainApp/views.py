@@ -164,12 +164,12 @@ def profile_stats_page(request,id):
 
     for language in snippetLangCount:
         snippetProccent[language]=(snippetLangCount[language]/countsnipt*100)
-    print(snippetProccent)
+
     resault = {}
     i=0
     for proc in snippetProccent:
-        resault[f"{proc}: {round(snippetProccent[proc],2)}"]=''
+        resault[f"{proc}: {round(snippetProccent[proc],2)}"]=len(snippetProccent)-i
         i+=1
-    content = {"languages": resault}
+    content = {"languages": resault,"pagename": "Статистика"}
     print(content)
     return render(request,"profile_stats.html", context=content)
