@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -125,3 +125,17 @@ STATICFILES_DIRS = [
   BASE_DIR / "static"
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+choices = (("Python", "Python"),
+           ("Java", "Java"),
+           ("Javascript", "Javascript"),
+           ("Go", "Go"),
+           ("Kotlin", "Kotlen"),
+           ("C#", "C#"),
+           ("PHP", "PHP"),
+           ("C++", "C++"),
+           ("C#", "C#"),
+           ("C", "C"),
+           ("SQL", 'SQL'),
+           ("HTML", "HTML"),
+           ("CSS", "CSS")
+           )

@@ -20,6 +20,7 @@ def languages(request):
     return render(request, 'languages.html', context)
 
 def create_snippet(request):
+    if not request.user.is_authenticated: return redirect("signin")
     if request.method == "GET":
         form = SnippetForm()
         context = {

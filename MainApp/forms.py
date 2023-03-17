@@ -2,30 +2,12 @@ from MainApp.models import Snippet, Languages
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from Snippets.settings import choices
 class SnippetForm(forms.ModelForm):
     class Meta:
       model = Snippet
-      languages = []
-      for i in Languages.objects.filter(show=True):
-          languages.append((i.language, i.language))
-      languages = tuple(languages)
       # Описываем поля, которые будем заполнять в форме
       fields = ['name', 'language', 'code','public']
-      choices = (("Python", "Python"),
-                 ("Java", "Java"),
-                 ("Javascript", "Javascript"),
-                 ("Go", "Go"),
-                 ("Kotlin", "Kotlen"),
-                 ("C#", "C#"),
-                 ("PHP","PHP"),
-                 ("C++","C++"),
-                 ("C#","C#"),
-                 ("C","C"),
-                 ("SQL", 'SQL'),
-                 ("HTML","HTML"),
-                 ("CSS","CSS")
-                )
 
       widgets = {
           'name': forms.TextInput(attrs={"class":"form-control form-control-lg", 'placeholder': 'Название сниппета'}),
