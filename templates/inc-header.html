@@ -1,0 +1,35 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" width="32" height="32" alt="">
+            PythonBin
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="form-inline">
+                    <a class="btn btn-outline-secondary" href="{% url 'add_snippets' %}">
+                        Добавить сниппет
+                    </a>
+                </li>
+
+                <li class="form-inline">
+                    <a class="btn btn-outline-info" href="{% url 'list_snippets' %}">
+                        Посмотреть сниппеты
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="form-inline">
+                    <a class="btn btn-outline-secondary" href="{% url 'profile_snippets' %}">
+                        Мои сниппеты
+                    </a>
+                </li>
+                {% endif%}
+            </ul>
+        </div>
+    </div>
+</nav>

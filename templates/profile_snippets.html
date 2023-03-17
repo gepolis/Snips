@@ -1,0 +1,99 @@
+<!doctype html>
+{% load static %}
+<html lang="ru" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PythonBin</title>
+
+    {% block style %}
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- Fontawessome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+        <!-- Custom styles for this template -->
+        <style>
+            main > .container {
+                padding: 60px 15px 0;
+            }
+
+            .footer {
+                background-color: #f5f5f5;
+            }
+
+            .footer > .container {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+        </style>
+    {% endblock %}
+</head>
+
+<body class="d-flex flex-column h-100">
+
+<header>
+    {% include "inc-header.html" %}
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="mt-3 flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{ pagename }}</h1>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p>На данной страницы будут отображаться все созданные сниппеты.</p>
+                <p>Пока тут просто пример, но скоро заменим реальными сниппетами из БД!</p>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Дата создания</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for snip in snips %}
+                        <tr>
+                            <td scope="row">{{ snip.pk }}</td>
+                            <td><a href="/snippets/{{snip.pk}}">{{ snip.name }}</a></td>
+                            <td>{{ snip.creation_date }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                <div align="right">
+                    <i style="color: gray;">Всего сниппетов: {{ count }}</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <footer class="footer mt-auto py-3">
+         {% include "inc-footer.html" %}
+    </footer>
+
+<!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" crossorigin="anonymous"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" crossorigin="anonymous"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"></script>
+</body>
+
+</html>
