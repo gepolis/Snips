@@ -14,10 +14,6 @@ def index_page(request):
     return render(request, 'index.html', context)
 
 def languages(request):
-    langs = []
-    for i in Languages.objects.filter(show=True):
-        langs.append((i.language, i.language))
-    print(tuple(langs))
     context = {'pagename': 'PythonBin', "languages": Languages.objects.all()}
     print(request.user.is_authenticated)
     return render(request, 'languages.html', context)
@@ -41,14 +37,14 @@ def create_snippet(request):
 
 
 def snippets_page(request):
-    snips = Snippet.objects.filter(show=True)
+    snips = Snippet.objects.filter(public=True)
     context = {'pagename': 'Просмотр сниппетов', 'snips': snips, 'count': len(snips)}
     return render(request, 'view_snippets.html', context)
 
 
 def view_snippet_page(request, id):
     item = Snippet.objects.get(pk=id)
-    if item.show==False:
+    if item.public==False:
         if request.user.is_authenticated:
 
                 if item.author == request.user.id:
@@ -80,7 +76,7 @@ def delete_snippet_page(request, id):
     return redirect("/profile/snippets")
 def raw_snippet_page(request, id):
     snip = Snippet.objects.get(pk=id)
-    if snip.show==True:
+    if snip.public==True:
         return render(request,"raw.html",context={"snippet": snip})
     else:
         if request.user.is_authenticated:
@@ -91,8 +87,8 @@ def raw_snippet_page(request, id):
     return redirect("/profile/snippets")
 def html_snippet_page(request, id):
     snip = Snippet.objects.get(pk=id)
-    if snip.lang != "HTML": return redirect("/")
-    if snip.show==True:
+    if snip.language != "HTML": return redirect("/")
+    if snip.public==True:
         return render(request,"view_html_snippet.html",context={"snippet": snip})
     else:
         if request.user.is_authenticated:

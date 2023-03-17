@@ -6,12 +6,12 @@ from django.contrib.auth.models import User
 class SnippetForm(forms.ModelForm):
     class Meta:
       model = Snippet
-      langs = []
+      languages = []
       for i in Languages.objects.filter(show=True):
-          langs.append((i.language, i.language))
-      langs = tuple(langs)
+          languages.append((i.language, i.language))
+      languages = tuple(languages)
       # Описываем поля, которые будем заполнять в форме
-      fields = ['name', 'lang', 'code','show']
+      fields = ['name', 'language', 'code','public']
       choices = (("Python", "Python"),
                  ("Java", "Java"),
                  ("Javascript", "Javascript"),
@@ -29,9 +29,9 @@ class SnippetForm(forms.ModelForm):
 
       widgets = {
           'name': forms.TextInput(attrs={"class":"form-control form-control-lg", 'placeholder': 'Название сниппета'}),
-          'lang': forms.Select(attrs={"class": "form-control form-control-lg", 'placeholder': 'Язык'}, choices=langs),
+          'language': forms.Select(attrs={"class": "form-control form-control-lg", 'placeholder': 'Язык'}, choices=languages),
           'code': forms.Textarea(attrs={"class": "form-control form-control-lg", 'placeholder': 'Название сниппета', 'cols': '96', 'rows': '10'}),
-          'show': forms.CheckboxInput(attrs={"class": "form-control form-control-lg"})
+          'public': forms.CheckboxInput(attrs={"class": "form-control form-control-lg"})
       }
       labels = {
           'name': ''
@@ -53,7 +53,3 @@ class NewUserForm(UserCreationForm):
         return user
 
 
-class EditrSnippetForm(forms.ModelForm):
-    class Meta:
-        model = Snippet
-        fields = ['name', 'lang', 'code']

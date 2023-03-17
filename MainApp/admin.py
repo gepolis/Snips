@@ -13,5 +13,5 @@ class LanguageModelAdmin(admin.ModelAdmin):
 
 @admin.register(Snippet)
 class SnippetModelAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "lang", "creation_date", "author","show")
-    list_filter = ('lang',"show")
+    list_display = ("id", "name", "language", "creation_date", "author","public")
+    list_filter = ('language',"public")
